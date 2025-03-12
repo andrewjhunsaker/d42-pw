@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 /**
  * Read environment variables from file.
@@ -15,7 +18,8 @@ import * as path from 'path';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  // Set this to true if you want multiple workers to run tests simultaneously. Otherwise, tests will be run serially. 
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -25,8 +29,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`.*/
-    // Set baseURL to your environment's url; https://10.90.10.16
-    baseURL: 'http://10.90.10.16',
+    // baseURL: the base URL for all tests. 
+    baseURL: process.env.BASE_URL,
     storageState: path.join(__dirname, 'storageState.json'),
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

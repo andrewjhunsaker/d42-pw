@@ -23,6 +23,7 @@ async function globalSetup(config: FullConfig) {
   console.log('No storageState.json found. Logging in...');
   
   const browser = await chromium.launch({
+    // remove this if you don't need a browser window to see the login process.
     headless: false
   });
   const context = await browser.newContext({
