@@ -49,10 +49,10 @@ npx playwright test tests/codegen.spec.ts --project=chrome
 
 You can alternatively just use the codegen tag like this:
 ```bash
-npx playwright codegen --project=chrome https://your-environment/path/to/page 
+npx playwright codegen --ignore-https-errors --load-storage=storageState.json https://10.90.10.16/path/to/whatever
 ```
 
-This will open a browser window in Chrome, take you directly to the page you want and open a separate debugging window.
+This will open a browser window in Chrome (with ignore https errors and session info), take you directly to the page you want and open a separate debugging window.
 
 ### The await page.pause(); Function
 This line will stop the test and open the debugging tool in a separate window.
@@ -100,7 +100,10 @@ To create a new test:
 1. Create or add to an existing `.spec.ts` file. Copy the contents of `codegen.spec.ts` and paste them into the new file if you created a new test file.
 2. Put all of your tests inside the `test()` block. 
 3. Add `await page.pause();` where you want to open the debugging window to add generated steps.
-
+4. Click Record in the debugging window if it is not already recording.
+5. Interact with the browser window. Each action will populate the debugging window.
+6. Copy the recorded steps and paste into the file. 
+7. Close the codegen browser window. 
 ## Debug Window
 
 You can record actions, pick locators, interact with pages and basically everything you would do with a browser using the Playwright debug tool. Refer to the playwright codegen doc below for specifics.
