@@ -37,9 +37,9 @@ USERNAME=your-username
 PASSWORD=your-password
 ```
 
-## Running Codegen
+## Running Codegen/Tests
 
-### Run a test using the chrome project
+### Run codegen using the chrome project
 
 This will open up a browser window, login if there is no saved session `storageState.json`, then take you to the Home page.
 
@@ -48,6 +48,7 @@ npx playwright test tests/codegen.spec.ts --project=chrome
 ```
 
 You can alternatively just use the codegen tag like this:
+
 ```bash
 npx playwright codegen --ignore-https-errors --load-storage=storageState.json https://10.90.10.16/path/to/whatever
 ```
@@ -56,6 +57,39 @@ This will open a browser window in Chrome (with ignore https errors and session 
 
 ### The await page.pause(); Function
 This line will stop the test and open the debugging tool in a separate window.
+
+### Run a single test file
+
+This will run a single `.spec.ts` file. By default, tests are run sequentially from the top to the bottom in each file.
+
+```bash
+npx playwright test tests/your-test.spec.ts --project=chrome
+```
+
+### Run tests in a directory
+
+This will run all `.spec.ts` in a subdirectory. By default, the order of test files will be random but tests within each file will be run sequentially from top to bottom. 
+
+_*In `playwright.config.ts`, fullyParallel is set to false by default which means tests will be run one at a time by a single worker._
+
+```bash
+npx playwright test tests/to/your/directory/ --project=chrome
+```
+
+### Run all tests in tests/
+
+```bash
+npx playwright test --project=chrome
+```
+
+_*In all of the ways you run tests, you can emulate whatever project, browser or device you'd like by changing the `--project` tag like so `--project='firefox'` or `--device='iPhone 6'`. [Here's a full list of emulated devices.](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json)
+
+### Reports
+
+Reports are turned off by default but if you'd like to see it after a test run you can use the following command:
+```bash
+npx playwright show-report
+```
 
 ## Authentication
 
@@ -70,7 +104,7 @@ The saved authentication state is stored in `storageState.json`. If you need to 
 
 ## Configuration
 
-The project is configured with:
+The `chrome` project is configured with:
 
 - Chrome browser
 - Maximized browser window
