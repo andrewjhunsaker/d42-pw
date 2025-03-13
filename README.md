@@ -55,7 +55,8 @@ npx playwright codegen --ignore-https-errors --load-storage=storageState.json ht
 
 This will open a browser window in Chrome (with ignore https errors and session info), take you directly to the page you want and open a separate debugging window.
 
-### The await page.pause(); Function
+### The await page.pause(); function
+
 This line will stop the test and open the debugging tool in a separate window.
 
 ### Run a single test file
@@ -138,6 +139,7 @@ To create a new test:
 5. Interact with the browser window. Each action will populate the debugging window.
 6. Copy the recorded steps and paste into the file. 
 7. Close the codegen browser window. 
+
 ## Debug Window
 
 You can record actions, pick locators, interact with pages and basically everything you would do with a browser using the Playwright debug tool. Refer to the playwright codegen doc below for specifics.
