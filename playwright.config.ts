@@ -3,7 +3,10 @@ import * as path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
+const baseURL = process.env.BASE_URL || 'https://10.91.2.23';
+const url = new URL(baseURL);
+const hostname = url.hostname.replace(/\./g, '-');
+const storageStatePath = path.join(__dirname, `storageState-${hostname}.json`);
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -16,6 +19,12 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 300000,
+  expect: {
+    timeout: 30000,
+    toHaveScreenshot: {
+    }
+  },
   testDir: './tests',
   /* Run tests in files in parallel */
   // Set this to true if you want multiple workers to run tests simultaneously. Otherwise, tests will be run serially. 
@@ -31,7 +40,8 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`.*/
     // baseURL: the base URL for all tests. 
     baseURL: process.env.BASE_URL,
-    storageState: path.join(__dirname, 'storageState.json'),
+    
+    storageState: storageStatePath,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },

@@ -6,21 +6,25 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function globalSetup(config: FullConfig) {
-  const storageStatePath = path.join(__dirname, 'storageState.json');
   
   // .env
   const baseURL = process.env.BASE_URL || 'https://10.91.2.23';
   const username = process.env.USERNAME || 'admin';
   const password = process.env.PASSWORD || 'adm!nd42';
 
+  // extract hostname from baseurl
+  const url = new URL(baseURL);
+  const hostname = url.hostname.replace(/\./g, '-');
+  const storageStatePath = path.join(__dirname, `storageState-${hostname}.json`);
+
   // Skip if we already have a saved session
   if (fs.existsSync(storageStatePath)) {
-    console.log('Using existing authentication state.');
+    console.log(`Using existing authentication state for ${url}.`);
     return;
   }
   
   // No saved session found, login
-  console.log('No storageState.json found. Logging in...');
+  console.log(`${storageStatePath} found. Logging in...`);
   
   const browser = await chromium.launch({
     // remove this if you don't need a browser window to see the login process.
@@ -50,7 +54,7 @@ async function globalSetup(config: FullConfig) {
 
   // Save the authentication state
   await context.storageState({ path: storageStatePath });
-  console.log('Authentication state saved!');
+  console.log(`Authentication state saved for ${url}!`);
   
   await browser.close();
 }

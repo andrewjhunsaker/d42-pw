@@ -1,5 +1,9 @@
 # Playwright Testing Project
 
+## TODO
+### 1. Add fixture for random number, text, date generator.
+### 2. Add/modify screenshot function.
+### 3. Modify timeouts
 This repository contains everything you need to use codegen on Playwright.
 
 ## Getting Started
@@ -41,7 +45,7 @@ PASSWORD=your-password
 
 ### Run codegen using the chrome project
 
-This will open up a browser window, login if there is no saved session `storageState.json`, then take you to the Home page.
+This will open up a browser window, login if there is no saved session `storageState-{your-url}.json`, then take you to the Home page.
 
 ```bash
 npx playwright test tests/codegen.spec.ts --project=chrome 
@@ -50,7 +54,7 @@ npx playwright test tests/codegen.spec.ts --project=chrome
 You can alternatively just use the codegen tag like this:
 
 ```bash
-npx playwright codegen --ignore-https-errors --load-storage=storageState.json https://10.90.10.16/path/to/whatever
+npx playwright codegen --ignore-https-errors --load-storage=storageState-{your-url}.json https://10.90.10.16/path/to/whatever
 ```
 
 This will open a browser window in Chrome (with ignore https errors and session info), take you directly to the page you want and open a separate debugging window.
