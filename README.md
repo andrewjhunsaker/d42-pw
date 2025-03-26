@@ -1,10 +1,5 @@
 # Playwright Testing Project
-
-## TODO
-### 1. Add fixture for random number, text, date generator.
-### 2. Add/modify screenshot function.
-### 3. Modify timeouts
-This repository contains everything you need to use codegen on Playwright.
+This repository contains everything you need to meaningfully use codegen on Playwright.
 
 ## Getting Started
 
