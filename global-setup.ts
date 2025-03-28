@@ -17,9 +17,12 @@ async function globalSetup(config: FullConfig) {
   const hostname = url.hostname.replace(/\./g, '-');
   const storageStatePath = path.join(__dirname, `storageState-${hostname}.json`);
 
+  // project
+  const projectName = process.env.PLAYWRIGHT_PROJECT;
+
   // Skip if we already have a saved session
   if (fs.existsSync(storageStatePath)) {
-    console.log(`Using existing authentication state for ${url}.`);
+    console.log(`${projectName}: Using existing authentication state for ${url}.`);
     return;
   }
   
