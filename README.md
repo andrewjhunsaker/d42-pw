@@ -6,7 +6,7 @@ This repository contains everything you need to meaningfully use codegen on Play
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-organization/your-repo-name.git
+git clone https://github.com/andrewjhunsaker/d42-pw.git
 cd your-repo-name
 ```
 
